@@ -3,16 +3,14 @@
 This project is an interactive data visualization web page built using **HTML**, **Bootstrap**, and **D3.js**, focused on showcasing information about the tallest buildings in the world.
 
 ## 📁 Project Structure
-
-  project/
-  │
-  ├── index.html # Main HTML file
-  ├── css/
-  │ └── style.css # Custom styling
-  ├── js/
-  │ └── main.js # D3.js chart logic
-  └── img/
-  └── 1.jpg # Default image for initial view
+project/
+├── index.html
+├── css/
+│   └── style.css
+├── js/
+│   └── main.js
+└── img/
+    └── 1.jpg
 
 
 ## 📊 Features
