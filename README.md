@@ -1,59 +1,58 @@
-# World's Tallest Buildings
+# 🌇 The World's Tallest Buildings - Interactive Visualization
 
-This project is a D3-based interactive bar chart that visualizes the ten tallest completed buildings in the world. It was developed as part of CS171: Data Visualization coursework.
+This project is an interactive data visualization web page built using **HTML**, **Bootstrap**, and **D3.js**, focused on showcasing information about the tallest buildings in the world.
+
+## 📁 Project Structure
+
+  project/
+  │
+  ├── index.html # Main HTML file
+  ├── css/
+  │ └── style.css # Custom styling
+  ├── js/
+  │ └── main.js # D3.js chart logic
+  └── img/
+  └── 1.jpg # Default image for initial view
+
 
 ## 📊 Features
 
-- **Horizontal Bar Chart** showing the tallest buildings
-- **Interactivity**: Click a building's bar or label to see more information
-- **Multi-column layout** using Bootstrap grid system
-- **D3.js Implementation**: Uses SVGs for dynamic drawing and updates
-- **Clean & Accessible UI**: Labels, heights, and responsive design
-- **Sorted View**: Buildings are displayed in descending order by height
+- Responsive two-column layout using Bootstrap.
+- Interactive D3 bar chart displaying building heights.
+- Dynamic details panel updating on building selection.
+- Information includes:
+  - Height (in meters)
+  - City and country
+  - Number of floors
+  - Completion year
+- Wikipedia link for additional building information.
 
+## 📦 Technologies Used
 
+- HTML5
+- CSS3
+- Bootstrap 5.3
+- D3.js v6
 
+## 🚀 Getting Started
 
+1. Clone or download the repository.
+2. Ensure your directory structure matches the one above.
+3. Open `index.html` in a browser.
 
-## 📐 Design Decisions
+## 📷 Screenshot
 
-- **SVG Drawing Area**: Minimum 500x500px for clarity
-- **Label Placement**:
-  - Building names on the left, right-aligned
-  - Heights displayed inside bars at the right end
-- **Fonts**: Uses Google Fonts (e.g., Roboto)
-- **Color Scheme**: Muted backgrounds with primary highlights for clarity
+![Screenshot](img/1.jpg)
 
-## 🧠 Good Practices
+## 🔧 Future Improvements
 
-- Modular functions for event listeners
-- Proper documentation within JavaScript
-- Semantic HTML and Bootstrap classes
-- External CSS for styling — no `<br>` for spacing
+- Add tooltip hover effects for better interactivity.
+- Include more data and dynamic loading from external CSV.
+- Mobile responsiveness enhancements.
 
-## 📦 Installation
+## 📚 License
 
-To run locally:
+This project is for educational purposes as part of a data visualization course.
 
-1. Clone/download the repository
-2. Open `hw/index.html` in a browser
-3. Ensure JS and CSS paths are correctly linked
+---
 
-## ✅ Requirements Completed
-
-- [x] D3 Horizontal Bar Chart
-- [x] Multi-column Bootstrap Layout
-- [x] Labels, SVG drawing, and interactivity
-- [x] Data sorting
-- [x] Responsive and accessible design
-- [x] Proper folder organization
-- [x] Good code structure and comments
-
-## 🧾 License
-
-This project is for educational use as part of CS171: Data Visualization coursework.
-
-## 🙌 Acknowledgments
-
-- Harvard CS171 Teaching Staff
-- *D3: Interactive Data Visualization for the Web* by Scott Murray
