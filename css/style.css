@@ -1,0 +1,46 @@
+h1 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: lighter;
+    margin-bottom: -10px;
+    margin-top: 20px;
+    color: #4a4e69;
+}
+
+h2 {
+    text-align: center;
+    font-family: Arial, sans-serif;
+    font-weight: lighter;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    font-size: 25px;
+}
+
+.building-label {
+    font-size: 10px;
+    text-anchor: end;
+    font-family: sans-serif;
+}
+
+.height-label{
+    font-size: 10px;
+    text-anchor: end;
+    font-family: sans-serif;
+    fill: white;
+}
+
+p{
+    font-size: 20px;
+    font-family: sans-serif;
+    margin-left: 30px;
+    text-align: left;
+    color: #6f7f74;
+    display:inline-block;
+}
+
+img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
