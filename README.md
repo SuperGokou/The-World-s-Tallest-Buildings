@@ -1,56 +1,68 @@
-# 🌇 The World's Tallest Buildings - Interactive Visualization
+# The World's Tallest Buildings
 
-This project is an interactive data visualization web page built using **HTML**, **Bootstrap**, and **D3.js**, focused on showcasing information about the tallest buildings in the world.
+An interactive data visualization showcasing the world's 10 tallest buildings with animated charts and detailed building information.
 
-## 📁 Project Structure
-        project/
-        ├── index.html
-        ├── css/
-        │   └── style.css
-        ├── js/
-        │   └── main.js
-        └── img/
-            └── 1.jpg
+## Demo
 
+**[View Live Demo](https://supergokou.github.io/The-World-s-Tallest-Buildings/)**
 
-## 📊 Features
+## Screenshot
 
-- Responsive two-column layout using Bootstrap.
-- Interactive D3 bar chart displaying building heights.
-- Dynamic details panel updating on building selection.
-- Information includes:
-  - Height (in meters)
-  - City and country
-  - Number of floors
-  - Completion year
-- Wikipedia link for additional building information.
+![Screenshot](img/ScreenShot.png)
 
-## 📦 Technologies Used
+## Features
+
+- **Animated Bar Chart** - Bars animate on load with staggered timing and unique colors
+- **Interactive Selection** - Click any bar or building name to view details
+- **Building Details** - View height, floors, city, country, and completion year
+- **Wikipedia Links** - Direct links to learn more about each building
+- **Responsive Design** - Works on desktop and mobile devices
+- **Smooth Transitions** - Image crossfade and selection highlighting
+
+## Buildings Included
+
+| Rank | Building | City | Height |
+|------|----------|------|--------|
+| 1 | Burj Khalifa | Dubai | 828m |
+| 2 | Makkah Royal Clock Tower | Mecca | 601m |
+| 3 | One World Trade Center | New York | 541m |
+| 4 | Taipei 101 | Taipei | 508m |
+| 5 | Shanghai World Financial Center | Shanghai | 492m |
+| 6 | International Commerce Centre | Hong Kong | 484m |
+| 7 | Petronas Twin Towers | Kuala Lumpur | 452m |
+| 8 | Zifeng Tower | Nanjing | 450m |
+| 9 | Willis Tower | Chicago | 442m |
+| 10 | KK100 | Shenzhen | 442m |
+
+## Tech Stack
 
 - HTML5
-- CSS3
+- CSS3 (Flexbox, Grid, CSS Variables)
 - Bootstrap 5.3
 - D3.js v6
 
-## 🚀 Getting Started
+## Project Structure
 
-1. Clone or download the repository.
-2. Ensure your directory structure matches the one above.
-3. Open `index.html` in a browser.
+```
+├── index.html
+├── css/
+│   ├── bootstrap.min.css
+│   └── style.css
+├── js/
+│   └── main.js
+├── data/
+│   └── buildings.csv
+└── img/
+    └── [building images]
+```
 
-## 📷 Screenshot
+## Getting Started
 
-![Screenshot](img/1.jpg)
+1. Clone the repository
+   ```bash
+   git clone https://github.com/supergokou/The-World-s-Tallest-Buildings.git
+   ```
 
-## 🔧 Future Improvements
+2. Open `index.html` in your browser
 
-- Add tooltip hover effects for better interactivity.
-- Include more data and dynamic loading from external CSV.
-- Mobile responsiveness enhancements.
-
-## 📚 License
-
-This project is for educational purposes as part of a data visualization course.
-
----
 

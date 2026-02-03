@@ -1,98 +1,135 @@
-let svg = d3.select("#bar-chart").append("svg")
-    .attr("width", 500)
-    .attr("height", 500)
+// Chart configuration
+const CONFIG = {
+    barWidth: 36,
+    barGap: 12,
+    labelOffset: 130,
+    barStartX: 140,
+    chartWidth: 520,
+    chartHeight: 480,
+    colors: [
+        '#ef8354', '#4f5d75', '#2d3142', '#667eea', '#764ba2',
+        '#f093fb', '#f5576c', '#4facfe', '#00f2fe', '#43e97b'
+    ]
+};
 
+// Create SVG element
+const svg = d3.select('#bar-chart')
+    .attr('width', CONFIG.chartWidth)
+    .attr('height', CONFIG.chartHeight);
 
-d3.csv("data/buildings.csv", (row) => {
-    // Convert numerical values from strings to numbers
-    row.height_m = +row.height_m;
-    row.height_px = +row.height_px;
-    return row;
-}).then( (data) => {
+// Track selected building
+let selectedIndex = 0;
 
-    data.sort(function(a, b) {
-        return b.height_m - a.height_m;
-    });
+// Load and render data
+d3.csv('data/buildings.csv', row => ({
+    building: row.building,
+    country: row.country,
+    city: row.city,
+    height_m: +row.height_m,
+    height_px: +row.height_px,
+    floors: +row.floors,
+    completed: +row.completed,
+    image: row.image,
+    wiki: row.wiki
+}))
+.then(data => {
+    // Sort by height descending
+    data.sort((a, b) => b.height_m - a.height_m);
 
-    const barWidth = 40;
-    const barGap = 10;
-
-    svg.selectAll("rect")
+    // Create bars with gradient colors
+    svg.selectAll('rect')
         .data(data)
         .enter()
-        .append("rect")
-        .attr("y", function(d, i) {
-            // Position each bar horizontally (left-aligned)
-            return i * (barWidth + barGap);
+        .append('rect')
+        .attr('x', CONFIG.barStartX)
+        .attr('y', (d, i) => i * (CONFIG.barWidth + CONFIG.barGap))
+        .attr('width', 0)
+        .attr('height', CONFIG.barWidth)
+        .attr('rx', 4)
+        .style('fill', (d, i) => CONFIG.colors[i % CONFIG.colors.length])
+        .on('click', (event, d) => {
+            selectedIndex = data.indexOf(d);
+            updateDetails(d);
+            updateSelection();
         })
-        .attr("x", 135)
-        .attr("height", barWidth)
-        .attr("width", function(d) {
-            // Use the 'height_px' data column to set the bar height
-            return d.height_px;
-        })
-        .style("fill", "#4a4e69");
+        .transition()
+        .duration(800)
+        .delay((d, i) => i * 80)
+        .attr('width', d => d.height_px);
 
-    svg.selectAll(".building-label")
+    // Create building name labels
+    svg.selectAll('.building-label')
         .data(data)
         .enter()
-        .append("text")
-        .attr("class", "building-label")
-        .attr("x", 125)
-        .attr("y", function(d, i) {
-            // Position labels vertically aligned with bars
-            return i * (barWidth + barGap) + 20; // Adjust the vertical position
+        .append('text')
+        .attr('class', 'building-label')
+        .attr('x', CONFIG.labelOffset)
+        .attr('y', (d, i) => i * (CONFIG.barWidth + CONFIG.barGap) + CONFIG.barWidth / 2 + 4)
+        .text(d => d.building)
+        .style('opacity', 0)
+        .on('click', (event, d) => {
+            selectedIndex = data.indexOf(d);
+            updateDetails(d);
+            updateSelection();
         })
-        .text(function(d) {
-            return d.building; // Display the building name
-        });
+        .transition()
+        .duration(500)
+        .delay((d, i) => i * 80 + 400)
+        .style('opacity', 1);
 
-
-    svg.selectAll(".height-label")
+    // Create height labels on bars
+    svg.selectAll('.height-label')
         .data(data)
         .enter()
-        .append("text")
-        .attr("class", "height-label")
-        .attr("x", function(d) {
-            return 130+d.height_px;
-        })
-        .attr("y", function(d, i) {
-            // Position labels vertically aligned with bars
-            return i * (barWidth + barGap) + 20; // Adjust the vertical position
-        })
-        .text(function(d) {
-            return d.height_m; // Display the building height
-        });
+        .append('text')
+        .attr('class', 'height-label')
+        .attr('x', d => CONFIG.barStartX + d.height_px - 8)
+        .attr('y', (d, i) => i * (CONFIG.barWidth + CONFIG.barGap) + CONFIG.barWidth / 2 + 4)
+        .text(d => d.height_m + 'm')
+        .style('opacity', 0)
+        .transition()
+        .duration(500)
+        .delay((d, i) => i * 80 + 600)
+        .style('opacity', 1);
 
+    // Update selection styling
+    function updateSelection() {
+        svg.selectAll('.building-label')
+            .classed('active', (d, i) => i === selectedIndex);
 
-    function updateBuildingDetails(buildingData) {
-        const detailsDiv = d3.select("#building-details");
-        detailsDiv.html("");
-        // Update the image source
-        const imgElement = d3.select("#image_holder");
-        imgElement.attr("src", "img/" + buildingData.image);
-
-        d3.select("#name").text(buildingData.building);
-        d3.select("#height").text(buildingData.height_m + "m");
-        d3.select("#city").text(buildingData.city);
-        d3.select("#country").text(buildingData.country);
-        d3.select("#floor").text(buildingData.floors);
-        d3.select("#complete").text(buildingData.completed);
-
+        svg.selectAll('rect')
+            .transition()
+            .duration(200)
+            .style('opacity', (d, i) => i === selectedIndex ? 1 : 0.7);
     }
-    // Add click event listeners to the bars
-    svg.selectAll("rect")
-        .on("click", function(event, d) {
-            // Call the function to update building details
-            updateBuildingDetails(d);
-        });
 
-    // Add click event listeners to the building labels
-    svg.selectAll(".building-label")
-        .on("click", function(event, d) {
-            // Call the function to update building details
-            updateBuildingDetails(d);
-        });
-
+    // Set initial selection
+    updateDetails(data[0]);
+    setTimeout(updateSelection, 1000);
+})
+.catch(error => {
+    console.error('Error loading building data:', error);
+    document.querySelector('.chart-section').innerHTML =
+        '<p style="color: #e74c3c; padding: 20px; text-align: center;">Failed to load data. Please run from a web server.</p>';
 });
 
+// Update the details panel with selected building info
+function updateDetails(building) {
+    const img = document.getElementById('image-holder');
+    img.style.opacity = '0';
+
+    setTimeout(() => {
+        img.src = 'img/' + building.image;
+        img.onload = () => {
+            img.style.opacity = '1';
+        };
+    }, 150);
+
+    document.getElementById('name').textContent = building.building;
+    document.getElementById('height').textContent = building.height_m + 'm';
+    document.getElementById('city').textContent = building.city;
+    document.getElementById('country').textContent = building.country;
+    document.getElementById('floors').textContent = building.floors;
+    document.getElementById('completed').textContent = building.completed;
+    document.getElementById('wiki-link').href = building.wiki;
+}
